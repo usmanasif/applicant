@@ -1,0 +1,152 @@
+<h2><%=@job.title%></h2>
+<p style="font-size:11px;line-height:20px;"><%=@job.description%></p>
+<h3>Minimum Experience - <b><%=@job.min_experience%></b></h4>
+  <h3>Last Date to Apply - <b><%=@job.end_date.strftime("%d-%m-%Y")%></b></h3>
+  <%if !@job.salary.blank?%>
+      <h3>Salary - <b><%=@job.salary.blank? ? 'Not-Mentioned' : @job.salary%></b></h3>
+  <%end%>
+
+  <p style="background:lightgreen;padding:10px;color:#fff;display:none;" id="response" >
+  </p>
+
+  <%if flash[:message]%>
+      <p style="background:lightgreen;padding:10px;color:#fff;" id="success" >
+        <%=flash[:message]%>
+        <script>
+            $(function() {
+                $('#formdiv').css('display','none');
+            });
+        </script>
+      </p>
+  <%end%>
+
+  <%if @errors%>
+      <div style="background:#FC9292;padding:5px;color:#fff;" id="error" >
+        <ul>
+          <%@errors.each do |err|%>
+              <li><%=err%></li>
+          <%end%>
+        </ul>
+      </div>
+  <%end%>
+  </header>
+
+  <mark id="message"></mark>
+  <div id="formdiv">
+    <form method="post" action="/jobs/<%=params[:id]%>/apply" enctype='multipart/form-data' name="contactform" id="contactform" autocomplete="on">
+
+      <fieldset>
+
+        <legend>Contact Details</legend>
+        <input type="hidden" name="id" value="<%=@job.id%>"/>
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+        <div>
+          <label for="name" accesskey="U">Full Name <small style="color:red;font-size:15px;">*</small></label>
+          <input name="user[full_name]" required="required" value="<%=@params.blank? ? '' : @params[:full_name]%>" type="text" id="name" placeholder="Enter your Full Name"  />
+        </div>
+        <div>
+          <label for="email" accesskey="E">Email <small style="color:red;font-size:15px;">*</small></label>
+          <input name="user[email]" required="required" type="email" id="email" value="<%=@params.blank? ? '' : @params[:email]%>" placeholder="Enter your Email Address" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required="required" />
+        </div>
+
+        <div>
+          <label for="phone" accesskey="P">Phone <small style="color:red;font-size:15px;">*</small> </label>
+          <input name="user[phone]" required="required" type="text" id="name" value="<%=@params.blank? ? '' : @params[:phone]%>" size="30" placeholder="Enter your phone number" />
+        </div>
+
+        <div>
+          <label for="phone" accesskey="P">DOB <small style="color:red;font-size:15px;">*</small></label>
+          <input name="user[dob]" required="required" type="text" id="dob" value="<%=@params.blank? ? '' : @params[:dob]%>" size="30" placeholder="Enter your date of brith" />
+        </div>
+
+        <div>
+          <label for="email" accesskey="E">Cover Letter <small>(optional)</small></label>
+          <textarea name="user[cover_letter]" value="<%=raw @params.blank? ? '' : @params[:cover_letter]%>" type="text"  placeholder="Introduce yourself, highlight your skills and experience, and tell us exactly why we should hire you. This is your big chance to show that you've read the job description, understand the position, and are qualified for the job." rows="8"  >
+            <%=raw @params.blank? ? '' : @params[:cover_letter]%>
+          </textarea>
+        </div>
+
+      </fieldset>
+      <input type="hidden" name="user[job_id]" value="<%=@params.blank? ? @job.id : @params[:id]%>"/>
+      <fieldset>
+
+        <legend>Education</legend>
+
+        <div>
+          <label for="name" accesskey="U">Resume <small style="color:red;font-size:15px;">*</small></label>
+          <input name="user[resume]" type="file"  placeholder="Add your Resume" required="required" />
+        </div>
+
+        <div>
+          <label for="phone" accesskey="P">Institute <small style="color:red;font-size:15px;">*</small></label>
+          <input name="user[institute_name]" required="required" type="text" value="<%=@params.blank? ? '' : @params[:institute_name]%>" id="name" size="30" placeholder="Institute Name " />
+        </div>
+
+        <div>
+          <label for="phone" accesskey="P">Education <small style="color:red;font-size:15px;">*</small></label>
+          <input name="user[education]"  required="required" type="text" value="<%=@params.blank? ? '' : @params[:education]%>" id="name" size="30" placeholder="Highest Level of Education e.g BSCS" />
+        </div>
+
+        <div>
+          <label for="email" accesskey="E">CGPA <small style="color:red;font-size:15px;">*</small></label>
+          <input name="user[cgpa]" type="text" value="<%=@params.blank? ? '' : @params[:cgpa]%>" placeholder="Enter your CGPA e.g 3.3" id="name" required="required" />
+        </div>
+
+      </fieldset>
+
+      <fieldset>
+
+        <legend>Employment Details</legend>
+
+        <div>
+          <label for="name" accesskey="U">Experience <small>(optional)</small></label>
+          <input name="user[experience]" type="text" value="<%=@params.blank? ? '' : @params[:experience]%>" placeholder="Number of months of experience e.g 9 months"  />
+        </div>
+        <div>
+          <label for="email" accesskey="E">Experience Description <small>(optional)</small></label>
+          <textarea name="user[experience_description]" value="<%=@params.blank? ? '' : @params[:experience_description]%>" type="text"  placeholder="Experience Description If Any" rows="8"  >
+            <%=raw @params.blank? ? '' : @params[:experience_description]%>
+          </textarea>
+        </div>
+
+        <div>
+          <label for="email" accesskey="E">Languages <small>(optional)</small></label>
+          <input name="user[languages]" value="<%=@params.blank? ? '' : @params[:languages]%>" type="text"  placeholder="Programming/Scripting Language You Are Proficient In"  />
+        </div>
+
+        <div>
+          <label for="email" accesskey="E">Expected Salary <small>(optional)</small></label>
+          <input name="user[expected_salary]" value="<%=@params.blank? ? '' : @params[:expected_salary]%>" type="text"  placeholder="What are your salary expectations?" />
+        </div>
+
+        <div>
+          <label for="phone" accesskey="P">Joining Date <small>(optional)</small></label>
+          <input name="user[available_at]" type="text" value="<%=@params.blank? ? '' : @params[:available_at]%>" id="join"  size="30" placeholder="Date you can join" />
+        </div>
+
+        <!--<label for="verify" accesskey="V" class="verify"><img src="classes/image.php" alt="Verification code" /></label>-->
+        <!--<input name="verify" type="text" id="verify" size="6" required="required" style="width: 50px;" title="This confirms you are a human user and not a spam-bot." />-->
+
+      </fieldset>
+      <input type="button" class="submit" id="none" value="Apply Now" onclick="submitForm();" />
+      <input type="button" class="submit" id="back" value="Back" style="float:right;" onclick="location.href='/jobs'" />
+
+    </form>
+  </div>
+  <script>
+      function submitForm(){
+          $('#contactform').submit();
+      }
+  </script>
+  </section>
+
+  <script>
+      $(function() {
+          $( "#dob" ).datepicker({changeYear: true,changeMonth: true,yearRange: "1980:2010",dateFormat: 'yy-mm-dd'});
+          $( "#join" ).datepicker({changeYear: true,changeMonth: true,yearRange: "2014:2014",dateFormat: 'yy-mm-dd'});
+          $( "#anim" ).change(function() {
+              $( "#dob" ).datepicker( "option", "showAnim", $( this ).val() );
+              $( "#join" ).datepicker( "option", "showAnim", $( this ).val() );
+          });
+      });
+  </script>

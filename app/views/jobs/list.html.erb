@@ -1,0 +1,31 @@
+<h2>Currently Available Jobs at Engin Technologies</h2>
+<h4>Please apply for jobs as per your experience.</h4>
+
+</header>
+
+<mark id="message"></mark>
+
+<fieldset>
+
+  <legend>Current Jobs</legend>
+
+  <%@open_jobs.each do|job|%>
+      <div>
+        <label class="radio">
+          <input type="radio" name="jobs" value="<%=job.id%>" id="optionsRadios1" value="option1" checked>
+          <%=job.title%>
+        </label>
+      </div>
+
+  <%end%>
+
+</fieldset>
+
+<input type="button" class="submit" id="submit3" onclick="applyJob();" value="Apply" />
+
+<script>
+    function applyJob(){
+        location.href='/jobs/'+$('#optionsRadios1:checked').val()+'/apply'
+    }
+</script>
+</section>

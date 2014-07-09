@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Jobs Portal - Engin Technologies</title>
+
+  <link href="/contact.css" rel="stylesheet" type="text/css" /> <!-- AJAX Contact Form Stylesheet -->
+
+  <script src="//code.jquery.com/jquery-latest.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+  <script src="/jquery.jigowatt.js"></script> <!-- AJAX Form Submit -->
+
+
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
+  <!--[if IE]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+
+<section id="contact">
+
+  <header>
+    <a href="<%=COMPANY_URL%>" target="_blank"><img src="<%=LOGO_URL%>" width="150px"/></a>
+
+    <!--<a title="http://www.facebook.com/engintechnologies" style="float:right;background:#E3E1E1;margin-right:5px"href="http://www.facebook.com/engintechnologies" target="_blank">-->
+      <!--<img alt="http://www.facebook.com/engintechnologies" height="20" src="http://www.engintechnologies.com/wp-content/uploads/2014/02/facebook.png">-->
+    <!--</a>-->
+    <!--<a title="http://www.twitter.com/engintech" style="float:right;background:#E3E1E1;margin-right:5px"href="http://www.twitter.com/engintech" target="_blank">-->
+      <!--<img alt="http://www.twitter.com/engintech" height="20" src="http://www.engintechnologies.com/wp-content/uploads/2014/02/twitter.png">-->
+    <!--</a>-->
+    <!--<a title="http://www.linkedin.com/company/2700206" style="float:right;background:#E3E1E1;margin-right:5px"href="http://www.linkedin.com/company/2700206" target="_blank">-->
+      <!--<img alt="http://www.linkedin.com/company/2700206" height="20" src="http://www.engintechnologies.com/wp-content/uploads/2014/02/linkedin.png">-->
+    <!--</a>-->
+    <!--<a title="http://www.google.com/+Engintechnologies" style="float:right;background:#E3E1E1;margin-right:5px"href="http://www.google.com/+Engintechnologies" target="_blank">-->
+      <!--<img alt="http://www.google.com/+Engintechnologies" height="20" src="http://www.engintechnologies.com/wp-content/uploads/2014/02/googleplus.png">-->
+    <!--</a>-->
+
+  <%#= stylesheet_link_tag    "application", :media => "all" %>
+  <%#= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+
+<%= yield %>
+    <p style="margin-left:auto;margin-right:auto;width:335px;margin-top:-38px;">All Rights Reserved 2014 - Jobs Portal Engin Technologies</p>
+</body>
+</html>
+

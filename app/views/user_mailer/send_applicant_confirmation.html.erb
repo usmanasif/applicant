@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title> <%=COMPANY%> - Email</title>
+</head>
+
+<body style="background-color: #eef2f6; font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;">
+<div align="center">
+  <br/><br/>
+  <div style="background: #fcfcfc; border-bottom: 1px solid #eee; width: 450px; padding: 25px 35px 10px 35px;">
+    <div align="left">
+      <h1 style="font-size: 26px; font-weight: 200; color: #000; margin: 0 0 10px 0;">Dear <%=@name%></h1>
+      <p style="font-size: 19px;font-weight: 300; color: #666; line-height: 1.5;">Thank You for applying for the post of <b> <%=@job_title%></b> at <b> <%=COMPANY%></b>.
+       We have received your application and we will contact you, if you are shortlisted.
+      </p>
+
+      <br/>
+      <p style="font-size: 19px;font-weight: 300; color: #666; line-height: 1.5;">If you would like to follow up on your status please send an email to us at <%=JOBS_SUPPORT_EMAIL%> atleast 7 days after applying.
+        <br/><br/>
+        Thank You and have a great day!
+        <br/>
+        <br/>
+
+      </p>
+      <p style="font-size: 19px;font-weight: 300; color: #666; line-height: 1.5;line-height: 0px;">
+        Best Regards,
+      <h1 class="logo" style="font-size:23px;font-weight: 300;">
+       <%=COMPANY%></h1>
+
+      </p>
+
+    </div>
+  </div>
+
+</div>
+</body>
+
+</html>
